@@ -49,7 +49,7 @@ class MainClass
                     {
                         CreateArray(out string[] unsortedArray);
                         Console.WriteLine("Введите целевое значение для поиска (1 до " + (arraySize) + ").");
-                        target = Choice(0, arraySize);
+                        target = Choice(0, arraySize + 1);
                         Searchers[0].StateChanged += consoleVisualizer.OnSortStateChanged;
                         Searchers[0].Search(unsortedArray, target);
                         Searchers[0].StateChanged -= consoleVisualizer.OnSortStateChanged;
@@ -58,7 +58,7 @@ class MainClass
                     {
                         CreateArray(out string[] sortedArray, sorted: true);
                         Console.WriteLine("Введите целевое значение для поиска (1 до " + (arraySize) + ").");
-                        target = Choice(0, arraySize);
+                        target = Choice(0, arraySize + 1);
                         Searchers[1].StateChanged += consoleVisualizer.OnSortStateChanged;
                         Searchers[1].Search(sortedArray, target);
                         Searchers[1].StateChanged -= consoleVisualizer.OnSortStateChanged;
@@ -131,12 +131,12 @@ class MainClass
     }
     private void CreateArray(out string[] array, bool sorted = false)
     {
-        int arrMaxSize = 50;
+        int arrMaxSize = 40;
         Console.WriteLine($"Введите размер массива (1-{arrMaxSize}).");
         arraySize = Choice(0, arrMaxSize + 1);
         Console.WriteLine("Введите символ для заполнения массива (пропустите для символа по умолчанию '⊞').");
         string userChoice = Console.ReadLine();
-        arrayChar = string.IsNullOrEmpty(userChoice) ? '⊞' : userChoice[0];
+        arrayChar = string.IsNullOrEmpty(userChoice) || userChoice[0] == ' ' ? '⊞' : userChoice[0];
         Console.Clear();
 
         array = new string[arraySize];
